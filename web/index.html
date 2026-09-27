@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SONNI TOP — Number Game</title>
+
+    <link rel="shortcut icon" href="./img/favicon.svg" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="background-glow"></div>
+    <div class="grid"></div>
+
+    <!-- Top controls -->
+    <div class="top-controls">
+
+        <button class="icon-btn" id="soundBtn" aria-label="Sound">
+            🔊
+        </button>
+
+        <button class="icon-btn" id="themeBtn" aria-label="Theme">
+            ☀
+        </button>
+
+        <!-- Language -->
+        <select class="language-select" id="languageSelect">
+            <option value="uz">UZ</option>
+            <option value="en">EN</option>
+            <option value="ru">RU</option>
+        </select>
+
+    </div>
+
+
+    <main class="game">
+
+        <!-- Badge -->
+        <div class="game__badge" data-i18n="badge">
+            SONLI O‘YIN
+        </div>
+
+
+        <!-- Heading -->
+        <h1>
+            <span class="title-first">SONNI</span>
+            <span class="title-second">TOP</span>
+        </h1>
+
+        <p class="game__description" data-i18n="description">
+            Men tanlagan sonni toping.<br>
+            Qancha tez topsangiz, shuncha ko‘p ball olasiz.
+        </p>
+
+
+        <!-- Difficulty -->
+        <div class="difficulty">
+
+            <button
+                class="difficulty__btn active"
+                data-level="easy"
+                data-i18n="easy"
+            >
+                OSON
+            </button>
+
+            <button
+                class="difficulty__btn"
+                data-level="medium"
+                data-i18n="medium"
+            >
+                O‘RTA
+            </button>
+
+            <button
+                class="difficulty__btn"
+                data-level="hard"
+                data-i18n="hard"
+            >
+                QIYIN
+            </button>
+
+            <button
+                class="difficulty__btn"
+                data-level="extreme"
+                data-i18n="extreme"
+            >
+                JUDA QIYIN
+            </button>
+
+        </div>
+
+
+        <!-- Main card -->
+        <div class="game__card">
+
+            <div class="card-top">
+
+                <div>
+                    <span data-i18n="range">DIAPAZON</span>
+                    <strong id="range">1—50</strong>
+                </div>
+
+                <div class="timer">
+                    <span data-i18n="time">VAQT</span>
+                    <strong id="timer">00:45</strong>
+                </div>
+
+            </div>
+
+
+            <!-- Status -->
+            <div
+                class="game__status"
+                id="status"
+                data-i18n="enterNumber"
+            >
+                Soningizni kiriting
+            </div>
+
+
+            <!-- Input -->
+            <input
+                type="number"
+                id="guessInput"
+                min="1"
+                max="50"
+                placeholder="00"
+                autocomplete="off"
+            >
+
+
+            <!-- Button -->
+            <button id="guessBtn" data-i18n="guess">
+                TOPISH
+            </button>
+
+
+            <!-- Game stats -->
+            <div class="game__info">
+
+                <div>
+                    <span data-i18n="attempts">URINISHLAR</span>
+                    <strong id="attempts">0</strong>
+                </div>
+
+                <div>
+                    <span data-i18n="score">BALL</span>
+                    <strong id="score">0</strong>
+                </div>
+
+                <div>
+                    <span data-i18n="streak">SERIYA</span>
+                    <strong id="streak">0</strong>
+                </div>
+
+            </div>
+
+
+            <!-- Progress -->
+            <div class="progress">
+
+                <div class="progress__top">
+                    <span data-i18n="gameProgress">O‘YIN PROGRESS</span>
+                    <span id="progressText">0</span>
+                </div>
+
+                <div class="progress__bar">
+                    <div id="progressFill"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- History -->
+        <section class="history">
+
+            <div class="section-title">
+                <span data-i18n="history">OLDINGI URINISHLAR</span>
+                <span id="historyCount">0</span>
+            </div>
+
+            <div class="history__list" id="historyList">
+                <div
+                    class="history-empty"
+                    data-i18n="emptyHistory"
+                >
+                    Hali urinishlar yo‘q
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- Statistics -->
+        <section class="statistics">
+
+            <div class="section-title">
+                <span data-i18n="statistics">STATISTIKA</span>
+                <span data-i18n="local">LOCAL</span>
+            </div>
+
+            <div class="statistics__grid">
+
+                <div class="stat">
+                    <span data-i18n="games">O‘YINLAR</span>
+                    <strong id="gamesPlayed">0</strong>
+                </div>
+
+                <div class="stat">
+                    <span data-i18n="wins">G‘ALABALAR</span>
+                    <strong id="gamesWon">0</strong>
+                </div>
+
+                <div class="stat">
+                    <span data-i18n="winRate">G‘ALABA %</span>
+                    <strong id="winRate">0%</strong>
+                </div>
+
+                <div class="stat">
+                    <span data-i18n="bestScore">ENG YUQORI BALL</span>
+                    <strong id="bestScore">0</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Restart -->
+        <button
+            class="restart"
+            id="restartBtn"
+            data-i18n="restart"
+        >
+            ↻ QAYTA BOSHLASH
+        </button>
+
+    </main>
+
+
+    <!-- Win Modal -->
+    <div class="modal" id="winModal">
+
+        <div class="modal__backdrop"></div>
+
+        <div class="modal__card">
+
+            <div class="win-icon">
+                ✓
+            </div>
+
+            <div
+                class="win-label"
+                data-i18n="congratulations"
+            >
+                TABRIKLAYMIZ
+            </div>
+
+            <h2>
+                <span data-i18n="you">SIZ</span>
+                <span data-i18n="gotIt">TOPDINGIZ!</span>
+            </h2>
+
+            <p data-i18n="winDescription">
+                Siz yashirin sonni topdingiz.
+            </p>
+
+            <div class="winning-number" id="winningNumber">
+                42
+            </div>
+
+            <div class="result-grid">
+
+                <div>
+                    <span data-i18n="score">BALL</span>
+                    <strong id="finalScore">0</strong>
+                </div>
+
+                <div>
+                    <span data-i18n="attempt">URINISH</span>
+                    <strong id="finalAttempts">0</strong>
+                </div>
+
+            </div>
+
+            <div
+                class="new-best"
+                id="newBest"
+                data-i18n="newBest"
+            >
+                ★ YANGI REKORD
+            </div>
+
+            <button
+                class="play-again"
+                id="playAgainBtn"
+                data-i18n="playAgain"
+            >
+                YANA O‘YNASH
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- Game Over Modal -->
+    <div class="modal" id="loseModal">
+
+        <div class="modal__backdrop"></div>
+
+        <div class="modal__card">
+
+            <div class="lose-icon">
+                ×
+            </div>
+
+            <div
+                class="win-label"
+                data-i18n="gameOver"
+            >
+                O‘YIN TUGADI
+            </div>
+
+            <h2>
+                <span data-i18n="time">VAQT</span>
+                <span data-i18n="over">TUGADI</span>
+            </h2>
+
+            <p data-i18n="secretNumber">
+                Yashirin son:
+            </p>
+
+            <div class="winning-number" id="lostNumber">
+                42
+            </div>
+
+            <button
+                class="play-again"
+                id="losePlayAgainBtn"
+                data-i18n="playAgain"
+            >
+                QAYTA O‘YNASH
+            </button>
+
+        </div>
+
+    </div>
+<footer class="footer">
+    <span>2026 MR.PRINCE</span>
+</footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
