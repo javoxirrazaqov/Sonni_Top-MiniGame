@@ -443,28 +443,28 @@ const levels = {
     easy: {
         min: 1,
         max: 50,
-        time: 45,
+        time: 60,
         multiplier: 1
     },
 
     medium: {
         min: 1,
         max: 100,
-        time: 60,
+        time: 50,
         multiplier: 1.5
     },
 
     hard: {
         min: 1,
         max: 500,
-        time: 75,
+        time: 40,
         multiplier: 2
     },
 
     extreme: {
         min: 1,
         max: 1000,
-        time: 105,
+        time: 25,
         multiplier: 3
     }
 
